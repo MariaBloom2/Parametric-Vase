@@ -28,10 +28,6 @@ const smoothness_slider = document.getElementById("smoothness");
 smoothness_slider.addEventListener("mouseup", onSliderChange, false);
 smoothness_slider.addEventListener("touchend", onSliderChange, false);
 
-const depthfolding_slider = document.getElementById("depthfolding");
-depthfolding_slider.addEventListener("mouseup", onSliderChange, false);
-depthfolding_slider.addEventListener("touchend", onSliderChange, false);
-
 const loader = new Rhino3dmLoader();
 loader.setLibraryPath("https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/");
 
@@ -73,8 +69,7 @@ async function compute() {
   const param5 = new RhinoCompute.Grasshopper.DataTree("Smoothness");
   param5.append([0], [smoothness_slider.valueAsNumber]);
 
-  const param6 = new RhinoCompute.Grasshopper.DataTree("Depth folding");
-  param6.append([0], [depthfolding_slider.valueAsNumber]);
+
 
   // clear values
   const trees = [];
@@ -83,7 +78,6 @@ async function compute() {
   trees.push(param3);
   trees.push(param4);
   trees.push(param5);
-  trees.push(param6);
 
   const res = await RhinoCompute.Grasshopper.evaluateDefinition(
     definition,
